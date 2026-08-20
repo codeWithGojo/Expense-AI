@@ -1,63 +1,44 @@
 # ExpenseAI
 
-A full-stack expense tracker with an AI financial coach.
+A Naira-first personal finance dashboard built to make spending patterns easier to understand before the month is over.
 
-- **Backend:** Node.js + Express + Prisma (SQLite locally, Postgres-ready for production) + JWT auth
-- **Frontend:** React + Vite + Tailwind + Recharts
-- **AI:** Rule-based coach out of the box (no API key needed) — swap in a real LLM call in `backend/src/routes/ai.js` when ready
+**Live demo:** https://expenseai-redesign.imegufavour30.chatgpt.site
 
-## Features (MVP)
+## Current redesign
 
-- Register / login (JWT)
-- Add / edit / delete / search expenses
-- Track income
-- Set savings goals and track progress
-- Pie chart of spend by category
-- AI insights + simple chat endpoint
+- Home view with total balance, card reference, monthly spending analytics, and recent transactions
+- Expenses view with a calendar strip, salary-versus-expense cards, and category budget progress
+- Total Expense view with income percentage, category chart, totals, and a plain-language insight
+- Responsive mobile navigation and add-expense sheet
+- Purple and coral visual system with Naira formatting throughout
+- JWT authentication and per-user isolation in the original API architecture
 
-## Run locally
+## Why I built it
 
-**Backend**
-```bash
-cd backend
-cp .env.example .env
-npm install
-npx prisma migrate dev --name init
-npm run dev
-```
-Runs on http://localhost:5000
+Most budgeting apps I found showed what had already happened but did not explain what to do next, and very few felt made for everyday spending in Naira. ExpenseAI is my attempt to make the important part obvious without turning money management into accounting homework.
 
-**Frontend**
+## Project structure
+
+- `frontend/` — the current React + Next.js responsive redesign
+- Root JavaScript files — the original Express, Prisma, and JWT backend work
+
+## Run the redesigned frontend
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Runs on http://localhost:5173 (proxies `/api` to the backend)
 
-## Run with Docker
+Then open http://localhost:3000.
 
-```bash
-docker-compose up --build
-```
+## Backend note
 
-## Push to your own GitHub repo
+The original backend files have been preserved at the repository root. Configure the values in `env.example` and finish consolidating the API entrypoint before connecting it to real financial data.
 
-From the project root:
+## Next steps
 
-```bash
-git init
-git add .
-git commit -m "Initial ExpenseAI build"
-git branch -M main
-git remote add origin YOUR_GITHUB_REPO_URL
-git push -u origin main
-```
-
-## Roadmap (next phases)
-
-- Swap SQLite → Postgres for production (`schema.prisma` provider)
-- Replace rule-based AI with a real LLM call (OpenAI/Anthropic) in `ai.js`
-- Add fraud/anomaly detection on expenses
-- Add recurring expenses + budgets
-- Add tests + deploy pipeline (Railway/Render/Vercel)
+- Connect the redesigned screens to the authenticated API
+- Complete recurring expense and budget persistence
+- Add tests for per-user access rules
+- Move production data from local SQLite to managed Postgres
